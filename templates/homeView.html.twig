@@ -17,7 +17,17 @@
       <span class="msg"></span>
     </form>
   </div>
+
+   <div id="result">
+        <!--Position information will be inserted here-->
+    </div>
+    <button type="button" onclick="showPosition();">Show Position</button>
+
+
 </section>
+
+
+
 <section class="ajax-section">
   <div class="container">
     <ul class="cities"></ul>
@@ -33,6 +43,18 @@
 
 <script src="js/script.js"></script>
 
+<script>
+    function showPosition() {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+                document.getElementById("result").innerHTML = positionInfo;
+            });
+        } else {
+            alert("Sorry, your browser does not support HTML5 geolocation.");
+        }
+    }
+</script>
 </HTML>
 </HTML>
 
