@@ -10,9 +10,9 @@
    <BODY>
       <section class="top-banner">
   <div class="container">
-    <h1 class="heading">Simple Weather App</h1>
+    <h1 class="heading">Clima - API</h1>
     <form>
-      <input type="text" placeholder="Search for a city" autofocus>
+      <input type="text" placeholder="Ingresa una ciudad" autofocus>
       <button type="submit">SUBMIT</button>
       <span class="msg"></span>
     </form>
@@ -21,9 +21,9 @@
    <div id="result">
         <!--Position information will be inserted here-->
     </div>
-    <button type="button" onclick="showPosition();">Show Position</button>
+    <button type="button" onclick="getLocation();">Mostrar posición actual</button>
 
-
+<div id="map"></div>
 </section>
 
 
@@ -33,28 +33,28 @@
     <ul class="cities"></ul>
   </div>
 </section>
-<footer class="page-footer">
-  <div class="container">
-    <small>Made with <span>❤</span> by <a href="http://georgemartsoukos.com/" target="_blank">George Martsoukos</a>
-    </small>
-  </div>
-</footer>
    </BODY>
 
 <script src="js/script.js"></script>
-
 <script>
-    function showPosition() {
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
-                document.getElementById("result").innerHTML = positionInfo;
-            });
-        } else {
-            alert("Sorry, your browser does not support HTML5 geolocation.");
-        }
-    }
+function getLocation() {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+
+  } else {
+    document.getElementById("result").innerHTML = "Geolocation is not supported by this browser.";
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+   document.getElementById("result").innerHTML = "Latitud: " + position.coords.latitude + " - " + "Longitud: " +  position.coords.longitude;
+}
+
+
+
 </script>
+
 </HTML>
 </HTML>
 
