@@ -12,8 +12,8 @@
   <div class="container">
     <h1 class="heading">Clima - API</h1>
     <form>
-      <input type="text" placeholder="Ingresa una ciudad" autofocus>
-      <button type="submit">SUBMIT</button>
+      <input type="text" id="ciudadInsertada" placeholder="Ingresa una ciudad" autofocus>
+      <button type="submit" id="botonPrincipal" value="este"  onclick="insertar(this);">SUBMIT</button>
       <span class="msg"></span>
     </form>
   </div>
@@ -54,6 +54,16 @@ function showPosition(position) {
 
 
 </script>
+
+<script>
+function insertar(x){
+//  var a = document.getElementById("ciudadInsertada").focus();
+   var buttonValue = document.getElementById('ciudadInsertada').value;
+alert("Hello! I am an alert box!!" + buttonValue);
+console.log(buttonValue);
+}
+</script>
+
 
 </HTML>
 </HTML>
