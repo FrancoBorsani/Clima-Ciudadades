@@ -5,6 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Buscado;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class HomeController extends AbstractController
 {
@@ -20,7 +25,7 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/insertarBD", name="insertarBD")
+     * @Route("/insertarBD", name="insertarBD", methods="POST")
      */
     public function insertar(Request $request) {
  
@@ -29,36 +34,23 @@ class HomeController extends AbstractController
          * el objeto se llama como la tabla a la
          * que representa.
          */
- 
-        $post = new Posts();
- 
-     //   $post->setId($id);
-        $post->setNombre($request);
-        $post->setCantBuscado(1);
- 
-        //Entity Manager
-        $em = $this->getDoctrine()->getEntityManager();
- 
-        //Persistimos en el objeto
-        $em->persist($post);
- 
-        //Insertarmos en la base de datos
-        $flush = $em->flush();
- 
-        if ($flush == null) {
-            echo "Post creado correctamente";
-        } else {
-            echo "El post no se ha creado";
-        }
- 
-      
-        die();
-    }
+
+         // you can fetch the EntityManager via $this->getDoctrine()
+        // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $buscado = new Buscado();
+        $buscado->setNombre($request->request->ciudadInsertada);
+        $buscado->setCantBuscado(1);
+
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($buscado);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
 
 
-
-
-
+}
 
 
 }

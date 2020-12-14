@@ -11,9 +11,9 @@
       <section class="top-banner">
   <div class="container">
     <h1 class="heading">Clima - API</h1>
-    <form>
-      <input type="text" id="ciudadInsertada" placeholder="Ingresa una ciudad" autofocus>
-      <button type="submit" id="botonPrincipal" value="este"  onclick="insertar(this);">SUBMIT</button>
+    <form action="{{ path('insertarBD') }}" method="POST">
+      <input type="text" id="ciudadInsertada" name="ciudadInsertada" placeholder="Ingresa una ciudad" autofocus>
+      <button type="submit" id="botonPrincipal" onclick="insertar(this);">SUBMIT</button>
       <span class="msg"></span>
     </form>
   </div>
@@ -33,6 +33,19 @@
     <ul class="cities"></ul>
   </div>
 </section>
+
+
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+
+{% endfor %}
+
+
+
    </BODY>
 
 <script src="js/script.js"></script>
@@ -57,10 +70,9 @@ function showPosition(position) {
 
 <script>
 function insertar(x){
-//  var a = document.getElementById("ciudadInsertada").focus();
+
    var buttonValue = document.getElementById('ciudadInsertada').value;
-alert("Hello! I am an alert box!!" + buttonValue);
-console.log(buttonValue);
+ 
 }
 </script>
 
