@@ -10,6 +10,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Buscado;
 use Symfony\Component\HttpFoundation\Request;
 
+use Redirect;
+use View;
+use App;
+use Illuminate\Support\Facades\Hash;
+
 
 class HomeController extends AbstractController
 {
@@ -43,14 +48,21 @@ class HomeController extends AbstractController
         $buscado->setNombre($request->request->get('ciudadInsertada'));
         $buscado->setCantBuscado(1);
 
+        $value=$request->request->get('ciudadInsertada');
+
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($buscado);
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+    
+    
+        return $this->render('secondHomeView.html.twig', [
+            'value'=>$value
 
-        return $this->render('homeView.html.twig');
-}
+        ]);
+    
+    }
 
 
 }

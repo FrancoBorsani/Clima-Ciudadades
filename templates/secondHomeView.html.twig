@@ -8,23 +8,7 @@
 
    </HEAD>
    <BODY>
-      <section class="top-banner">
-  <div class="container">
-    <h1 class="heading">Clima - API</h1>
-    <form action="{{ path('insertarBD') }}" method="POST">
-      <input type="text" id="ciudadInsertada" name="ciudadInsertada" placeholder="Ingresa una ciudad" autofocus>
-      <button type="submit" id="botonPrincipal" onclick="insertar(this);">SUBMIT</button>
-      <span class="msg"></span>
-    </form>
-  </div>
- 
-   <div id="result">
-        <!--Position information will be inserted here-->
-    </div>
-    <button type="button" onclick="getLocation();">Mostrar posición actual</button>
 
-<div id="map"></div>
-</section>
 
 
 
@@ -33,6 +17,10 @@
     <ul class="cities"></ul>
   </div>
 </section>
+
+<h1 style="color: white;">{{ value }}</h1>
+
+
 
 
 
