@@ -40,7 +40,7 @@ class HomeController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $buscado = new Buscado();
-        $buscado->setNombre($request->request->ciudadInsertada);
+        $buscado->setNombre($request->request->get('ciudadInsertada'));
         $buscado->setCantBuscado(1);
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
@@ -49,7 +49,7 @@ class HomeController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-
+        return $this->render('homeView.html.twig');
 }
 
 
