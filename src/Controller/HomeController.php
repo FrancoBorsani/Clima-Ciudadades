@@ -9,6 +9,7 @@ use AppBundle\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Buscado;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\BuscadoRepository;
 
 use Redirect;
 use View;
@@ -42,19 +43,50 @@ class HomeController extends AbstractController
 
          // you can fetch the EntityManager via $this->getDoctrine()
         // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
-        $entityManager = $this->getDoctrine()->getManager();
 
-        $buscado = new Buscado();
-        $buscado->setNombre($request->request->get('ciudadInsertada'));
-        $buscado->setCantBuscado(1);
+        $repository = $this->getDoctrine()->getRepository(Buscado::class);
+
+        $existBuscado = $repository->findOneBy(['nombre' => $request->request->get('ciudadInsertada')]);
+
+        //FIND BY PK
+      //  $existBuscado = $this->getDoctrine()->getRepository(Buscado::class)
+      //  ->find($request->request->get('ciudadInsertada'));
+
+          if (!$existBuscado) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $buscado = new Buscado();
+            $buscado->setNombre($request->request->get('ciudadInsertada'));
+            $buscado->setCantBuscado(1);
+    
+            $value=$request->request->get('ciudadInsertada');
+    
+            // tell Doctrine you want to (eventually) save the Product (no queries yet)
+            $entityManager->persist($buscado);
+    
+            // actually executes the queries (i.e. the INSERT query)
+            $entityManager->flush();
+    }else {
+
+        $existBuscado->setCantBuscado(2);
+
+        $entityManager = $this->getDoctrine()->getManager();
 
         $value=$request->request->get('ciudadInsertada');
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($buscado);
+        $entityManager->persist($existBuscado);
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+
+
+    }
+       
+       
+       
+       
+       
     
     
         return $this->render('secondHomeView.html.twig', [
