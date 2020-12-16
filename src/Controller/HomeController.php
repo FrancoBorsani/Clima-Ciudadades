@@ -24,7 +24,22 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('homeView.html.twig');
+        $repository = $this->getDoctrine()->getRepository(Buscado::class);
+        $cant = 0;
+        $maxBuscado = 0;
+        $todos = $repository->findAll();
+
+
+        foreach ($todos as $ciudades){
+            $cant = $ciudades->getCantBuscado();
+            if($cant >= $maxBuscado){
+                $ciudadMasBuscada = $ciudades;
+                $maxBuscado = $ciudadMasBuscada->getCantBuscado();
+            }
+        }
+
+           return $this->render('homeView.html.twig', ['masBuscado' => 
+           $ciudadMasBuscada->getNombre()]);
     }
 
 
