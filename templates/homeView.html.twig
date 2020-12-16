@@ -27,9 +27,11 @@
 </section>
 
 <br></br>
-<h2 style="color: white;">Ciudad más buscada:</h2>
-<h3  style="color: white;" id="masBuscado" name="masBuscado" value="{{ masBuscado }}">{{ masBuscado }}</h3>
+<h2 style="color: white;">Ciudad más buscada (si la selecciona verá su clima):</h2>
+<input type="text" id="masBuscado" value="{{ masBuscado }}" style="color: white;">
+<br></br>
 
+      
 <section class="ajax-section">
   <div class="container">
     <ul class="cities"></ul>
@@ -103,7 +105,7 @@ SUBSCRIBE HERE: https://home.openweathermap.org/users/sign_up*/
 const apiKey = "4d8fb5b93d4af21d66a2948710284366";
 
 document.getElementById("masBuscado").addEventListener("click", function(event){
-  e.preventDefault();
+  event.preventDefault()
     var buttonValue = document.getElementById('masBuscado').value;
  // let buttonValue = input.value;
 
