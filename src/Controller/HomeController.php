@@ -68,7 +68,7 @@ class HomeController extends AbstractController
             $entityManager->flush();
     }else {
 
-        $existBuscado->setCantBuscado(2);
+        $existBuscado->setCantBuscado($existBuscado->getCantBuscado() + 1);
 
         $entityManager = $this->getDoctrine()->getManager();
 
